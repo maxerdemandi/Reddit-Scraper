@@ -1,0 +1,37 @@
+import praw
+import pandas as pd
+
+reddit = praw.Reddit(client_id='',
+                     client_secret='',
+                     user_agent='')
+
+
+#This code gets "hot" posts from subreddit of choice
+
+hot_posts = reddit.subreddit('').hot(limit=)
+ml_subreddit = reddit.subreddit('')
+
+posts = []
+ml_subreddit = reddit.subreddit('')
+for post in ml_subreddit.hot(limit=):
+    posts.append([post.title, 
+                  post.score, 
+                  post.id, 
+                  post.subreddit, 
+                  post.url, 
+                  post.num_comments, 
+                  post.selftext, 
+                  post.created])
+
+posts = pd.DataFrame(posts,columns=['title', 
+                                    'upvotes', 
+                                    'post id', 
+                                    'subreddit', 
+                                    'post url', 
+                                    'number of comments', 
+                                    'body', 
+                                    'created at'])
+
+posts.to_csv('.csv')
+
+print("Finished scraping.")
